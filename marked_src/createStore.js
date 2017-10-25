@@ -7,9 +7,18 @@ import $$observable from 'symbol-observable'
  * If the current state is undefined, you must return the initial state.
  * Do not reference these action types directly in your code.
  */
+ /**
+  '@@redux/INIT'是redux私有的action的一个类型。我们不要在外部直接使用这个type。redux要求，对于无法捕获的action，必须返回
+  当前state。如果当前state是undefined,我们必须返回初始化的状态。
+ **/
 export const ActionTypes = {
   INIT: '@@redux/INIT'
 }
+
+/**
+  A Demo to use '@@redux/INIT' in our code:
+
+**/
 
 /**
  * Creates a Redux store that holds the state tree.

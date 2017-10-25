@@ -81,21 +81,22 @@
     "babel-plugin-transform-es2015-block-scoping": "^6.26.0",
     "babel-plugin-transform-es2015-classes": "^6.3.13",
     "babel-plugin-transform-es2015-computed-properties": "^6.3.13",
-    "babel-plugin-transform-es2015-destructuring": "^6.3.13",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-es2015-for-of": "^6.3.13",
     "babel-plugin-transform-es2015-function-name": "^6.3.13",
     "babel-plugin-transform-es2015-literals": "^6.3.13",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-es2015-object-super": "^6.3.13",
-    "babel-plugin-transform-es2015-parameters": "^6.3.13",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
     "babel-plugin-transform-es2015-shorthand-properties": "^6.3.13",
-    "babel-plugin-transform-es2015-spread": "^6.3.13",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
     "babel-plugin-transform-es2015-sticky-regex": "^6.3.13",
     "babel-plugin-transform-es2015-template-literals": "^6.3.13",
     "babel-plugin-transform-es2015-unicode-regex": "^6.3.13",
     "babel-plugin-transform-es3-member-expression-literals": "^6.5.0",
     "babel-plugin-transform-es3-property-literals": "^6.5.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-register": "^6.26.0",
     "cross-env": "^5.1.0",
     "eslint": "^4.9.0",
@@ -107,6 +108,7 @@
     "gitbook-cli": "^2.3.2",
     "glob": "^7.1.1",
     "jest": "^21.2.1",
+    "redux-logger": "^3.0.6",
     "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
@@ -117,21 +119,5 @@
     "typescript": "^1.8.0",
     "typescript-definition-tester": "0.0.4"
   },
-  "npmName": "redux",
-  "npmFileMap": [
-    {
-      "basePath": "/dist/",
-      "files": [
-        "*.js"
-      ]
-    }
-  ],
-  "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
-  },
-  "jest": {
-    "testRegex": "(/test/.*\\.spec.js)$"
-  }
+  "npmName": "redux"
 }
