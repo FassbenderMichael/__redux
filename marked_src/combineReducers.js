@@ -55,11 +55,13 @@ function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, une
 }
 
 function assertReducerShape(reducers) {
+  // 这个reducers参数是所有值为function类型的reducer
   Object.keys(reducers).forEach(key => {
     const reducer = reducers[key]
     const initialState = reducer(undefined, { type: ActionTypes.INIT })
 
     if (typeof initialState === 'undefined') {
+      // 表示通过combineReducer连接reducer的时候，必须给reducer设置默认值
       throw new Error(
         `Reducer "${key}" returned undefined during initialization. ` +
         `If the state passed to the reducer is undefined, you must ` +
@@ -100,25 +102,32 @@ function assertReducerShape(reducers) {
  * passed object, and builds a state object with the same shape.
  */
 export default function combineReducers(reducers) {
+  // 获取所有reducer的名称,每个reducer都是一个函数，而且这里的每个key都是对应的state中的名称。
   const reducerKeys = Object.keys(reducers)
+  // 保存最终的reducer对象
   const finalReducers = {}
   for (let i = 0; i < reducerKeys.length; i++) {
+    // 获取reducer的名称
     const key = reducerKeys[i]
 
     if (process.env.NODE_ENV !== 'production') {
+      // 开发环境下，对应的reducer是undefined的时候给出提示
       if (typeof reducers[key] === 'undefined') {
         warning(`No reducer provided for key "${key}"`)
       }
     }
 
     if (typeof reducers[key] === 'function') {
+      // 将传递进来的reducer对象保存到finalReducers中
       finalReducers[key] = reducers[key]
     }
   }
+  // 获取最终所有合法的reducer
   const finalReducerKeys = Object.keys(finalReducers)
 
   let unexpectedKeyCache
   if (process.env.NODE_ENV !== 'production') {
+    // 开发模式下
     unexpectedKeyCache = {}
   }
 
@@ -135,6 +144,7 @@ export default function combineReducers(reducers) {
     }
 
     if (process.env.NODE_ENV !== 'production') {
+      // 开发模式下
       const warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache)
       if (warningMessage) {
         warning(warningMessage)

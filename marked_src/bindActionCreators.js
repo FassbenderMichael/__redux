@@ -24,6 +24,8 @@ function bindActionCreator(actionCreator, dispatch) {
  * function.
  */
 export default function bindActionCreators(actionCreators, dispatch) {
+  // actionCreators只能是函数或者对象
+  
   if (typeof actionCreators === 'function') {
     return bindActionCreator(actionCreators, dispatch)
   }

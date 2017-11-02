@@ -18,6 +18,26 @@ export const ActionTypes = {
 /**
   A Demo to use '@@redux/INIT' in our code:
 
+  import {createStore, combineReducers, applyMiddleware} from '../src'
+  import logger from 'redux-logger'
+
+  const actionTypes = '@@redux/INIT'
+  const reducers = (state = {}, action) => {
+    switch(action.type) {
+      case actionTypes:
+        console.log('hello @@redux/INIT')
+        return {
+          'type': actionTypes
+        }
+      default:
+        return state
+    }
+  }
+  const store = createStore(reducers, applyMiddleware(logger))
+  console.log('*************************************')
+  console.log(store.getState()) // {'type': '@@redux/INIT'}
+  console.log('*************************************')
+
 **/
 
 /**
@@ -63,9 +83,15 @@ export default function createStore(reducer, preloadedState, enhancer) {
     throw new Error('Expected the reducer to be a function.')
   }
 
+  // 保存初始的reducer
   let currentReducer = reducer
+  // 保存初始的state
   let currentState = preloadedState
+  // 保存所有的事件监听器
   let currentListeners = []
+  // 为什么要这样做？？
+
+  // nextListeners就是
   let nextListeners = currentListeners
   let isDispatching = false
 
@@ -156,6 +182,8 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * return something else (for example, a Promise you can await).
    */
   function dispatch(action) {
+    // 这个就要求action必须是一个纯粹的javascript对象。如果你所传递的action或者action creator的返回值不是这种类型
+    // 必须要借助中间件进行处理
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -163,6 +191,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
       )
     }
 
+    // action的type是一个必需的字段
     if (typeof action.type === 'undefined') {
       throw new Error(
         'Actions may not have an undefined "type" property. ' +
@@ -175,12 +204,15 @@ export default function createStore(reducer, preloadedState, enhancer) {
     }
 
     try {
+      // 我们的应用中只能够有一个store，所以这个变量是在所有的dispatch方法中共享的。
       isDispatching = true
+      // currentReducer函数就是我们传递给createStore的reducer参数，这个函数会接收当前的state和action作为参数。
       currentState = currentReducer(currentState, action)
     } finally {
       isDispatching = false
     }
 
+    // 每次dispatch的时候，
     const listeners = currentListeners = nextListeners
     for (let i = 0; i < listeners.length; i++) {
       const listener = listeners[i]

@@ -13,6 +13,20 @@ const reducers = (state = {}, action) => {
   }
 }
 const store = createStore(reducers, applyMiddleware(logger))
-console.log('*************************************')
-console.log(store.getState()) // {'type': '@@redux/INIT'}
-console.log('*************************************')
+
+const listener1 = store.subscribe(() => {
+    console.log('listener1')
+})
+
+
+const listener2 = store.subscribe(() => {
+    listener3()
+    console.log('listener2')
+})
+
+
+const listener3 = store.subscribe(() => {
+    console.log('listener3')
+})
+
+store.dispatch({type: actionTypes})
