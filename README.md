@@ -6,7 +6,7 @@
 
 * [1.概括](https://github.com/SourceCooode/__redux/blob/master/reading/1.%E6%A6%82%E6%8B%AC.md)
 * [2.主模块](https://github.com/SourceCooode/__redux/blob/master/reading/2.%E4%B8%BB%E6%A8%A1%E5%9D%97.md)
-* [3.createStore源码解析]
+* [3.createStore源码解析](https://github.com/SourceCooode/__redux/blob/master/reading/3.createStore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md)
 
 测试的例子在`reading-example`文件夹中。
 
